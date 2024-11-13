@@ -1,0 +1,9 @@
+1, Blusa Mariposas,100,Damas
+2, Lentes,380,Caballeros
+3, Playera Elegante,490,Caballeros
+4, Pantalon Negro,420,Damas
+5, Vestido,250,Damas
+6, Falda Azul,249,Damas
+7, Gorro con Bufanda,99,Niños 
+8, Guantes de Osito,79,Niños
+9, Pantunflas de Conejo,89,Damas
