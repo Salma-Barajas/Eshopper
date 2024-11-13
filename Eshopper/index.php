@@ -1,10 +1,36 @@
 <!DOCTYPE html>
+<?php
+  $BDProductos = array(0,"CERO",0,"");
+ $i=0; $iProductos=1; 
+ $filas=file('archivo.txt'); 
+  foreach($filas as $value){
+    list($id, $producto, $precio, $categoria) = explode(",", $value);
+    array_push($BDProductos, $id);
+    array_push($BDProductos, $producto);
+    array_push($BDProductos, $precio);
+    array_push($BDProductos, $categoria);
+    $iProductos++;}
+    //Crea un ciclo foreach en el que se recorren los productos guardados en el archivo.txt(base de datos), estos se convierten en strings y se imprimen el id, nombre, precio y categoria del producto desde el mismo
+
+  $BDAlmacen = array( 
+    array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), //El IDProducto
+    array(0,10, 5,15, 3, 7, 20, 14, 18, 40)); //Las Existencias
+
+  $iAlmacen = 2; //El No. de existencias
+  $BDVentas = array(
+    array(2,3), //El IDProducto
+    array(2,1), //La Cantidad
+    array(700, 200)); //El Monto
+  $iVentas = 2; //El No. de ventas al momento
+
+
+?>
 <html lang="es">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="Software Punto de Venta" content="">
-    <meta name="Gerardo Aguilar" content="">
+    <meta name="Salma Barajas" content="">
     <title>Inicio | E-Shopper</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -32,8 +58,8 @@
 					<div class="col-sm-6">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
-								<li><a href="#"><i class="fa fa-phone"></i> +52 618 1200 776</a></li>
-								<li><a href="#"><i class="fa fa-envelope"></i> atencionclientes@gmail.com</a></li>
+								<li><a href="#"><i class="fa fa-phone"></i> +52 618 180 3533ñ</a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i> salma.barajas.aldama@cbtis89.edu.mx</a></li>
 							</ul>
 						</div>
 					</div>
@@ -52,9 +78,15 @@
 							<a href="index.php"><img src="images/home/logo.png" alt="" /></a>
 						</div>						
 					</div>
+          <H3>SOFTWARE PUNTO DE VENTA</H3>
 					<div class="col-sm-8">
+						Por: Salma Barajas
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
+								<li><a href="agregarproductos.php" target="_blank"><i
+                 class="fa fa-plus"></i>Agregar</a></li>
+                 <?php //Crea un boton que lleva a otra pagina par agregar productos a la base de datos
+                 ?>
 								<li><a href="checkout.php"><i class="fa fa-crosshairs"></i> Pagar</a></li>
 								<li><a href="cart.php"><i class="fa fa-shopping-cart"></i> Carrito</a></li>
 								<li><a href="login.php"><i class="fa fa-lock"></i> Login</a></li>
@@ -147,7 +179,11 @@
 						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Categoría 1</a></h4>
+									<h4 class="panel-title"><a href="#">Damas</a></h4>
+									<h4 class="panel-title"><a href="#">Caballeros</a></h4>
+									<h4 class="panel-title"><a href="#">Niños</a></h4>
+								<?php //Agrega las categorias en la pagina
+								?>
 								</div>
 							</div>
 						</div><!--/category-products-->
@@ -162,26 +198,37 @@
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Catálogo de Productos</h2>
+						<?php
+						  $n=4;
+						  //Variable contadora para llevar control
+                          for ($i=1; $i< $iProductos;$i++){
+                          //Crea un ciclo que inicia desde el 1, por el ID de los productos    
+                         ?>
 						<div class="col-sm-4">
 							<div class="product-image-wrapper">
 								<div class="single-products">
 										<div class="productinfo text-center">
-											<img src="images/home/product1.jpg" alt="" />
-											<h2>$56</h2>
-											<p>Producto 1</p>
+											<?php
+											//crea una variable para imprimir imagenes para sus productos respectivos
+											$img = $BDProductos[$n];?>
+											<img src="imagenes/home/<?php echo $img;?>.jpg" alt="" whith="210" height="180" />
+											<h2>
+											<?php echo "$ " . $BDProductos[$n+2];?>	
+											<h2>
+											<p><?php echo "$ " . $BDProductos[$n+1];?>
 											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Agregar al Carrito</a>
 										</div>
 										<div class="product-overlay">
-											<div class="overlay-content">
-												<h2>$56</h2>
-												<p>Producto 1</p>
+										<div class="overlay-content">
+						                <h2><?php echo '$ ' . $BDProductos[$n+1];?></h2>
+								        <p><?php echo $BDProductos[$n+2];?></p>	
 												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Agregar al Carrito</a>
 											</div>
 										</div>
 								</div>								
 							</div>
 						</div>
-						
+						 <?php $n+=4; } //Cierra ciclo ?>
 					</div><!--features_items-->
 					
 					
@@ -196,9 +243,16 @@
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<img src="images/home/recommend1.jpg" alt="" />
-													<h2>$50</h2>
-													<p>Producto Esp 1</p>
+													<img src="imagenes/home/8.jpg" alt="" />
+													<h2>$79</h2>
+													<p>Guantes de Osito</p>
+													<img src="images/home/9.jpg" alt="" />
+													<h2>$89</h2>
+													<p>Pantunflas de Conejo</p>
+													<img src="imagenes/home/10.jpg" alt="" />
+													<h2>$299</h2>
+													<p>Pijama de Tiburon</p>
+													<?php//Acomoda los mismos productos en la seccion de recomendados?>
 													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Agregar al Carrito</a>
 												</div>
 												
