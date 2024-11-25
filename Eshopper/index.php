@@ -210,19 +210,22 @@
 										<div class="productinfo text-center">
 											<?php
 											//crea una variable para imprimir imagenes para sus productos respectivos
-											$img = $BDProductos[$n];?>
-											<img src="imagenes/home/<?php echo $img;?>.jpg" alt="" whith="210" height="180" />
+											$img = $BDProductos[$n];
+											$productoB = $BDProductos[$n+1];
+											$precioB = $BDProductos[$n+2];
+											?>
+											<img src="imagenes/home/<?php echo $img;?>.jpg" alt="" whith="180" height="150" />
 											<h2>
-											<?php echo "$ " . $BDProductos[$n+2];?>	
+											<?php echo "$" . $productoB;?>	
 											<h2>
-											<p><?php echo "$ " . $BDProductos[$n+1];?>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Agregar al Carrito</a>
+											<p><?php echo "$" . $precioB;?>
+											<a href="cart.php?producto=<?php echo $productoB;?>&precio=<?php echo $precioB;?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Agregar al Carrito</a>
 										</div>
 										<div class="product-overlay">
 										<div class="overlay-content">
-						                <h2><?php echo '$ ' . $BDProductos[$n+1];?></h2>
-								        <p><?php echo $BDProductos[$n+2];?></p>	
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Agregar al Carrito</a>
+						                <h2><?php echo "$" . $precioB;?></h2>
+								        <p><?php echo "$" . $productoB;?></p>	
+												<a href="cart.php?producto=<?php echo $productoB;?>&precio=<?php echo $precioB;?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Agregar al Carrito</a>
 											</div>
 										</div>
 								</div>								
