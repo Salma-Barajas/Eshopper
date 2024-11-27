@@ -186,6 +186,7 @@
    if(file_exists('carritocompras.txt')){
       $content = trim(file_get_contents('carritocompras.txt'), PHP_EOL);
       $lineas = explode(PHP_EOL, $content);
+      $total=0;
       foreach($lineas as $linea){
          list($productoE, $precioE) = explode(',', $linea);
 ?>
@@ -194,11 +195,11 @@
 								<a href=""><img src="images/cart/one.png" alt=""></a>
 							</td>
 							<td class="cart_description">
-								<h4><a href=""><?php echo $productoE;?></a></h4>
+								<h4><a href=""><?php echo "$" . $productoE;?></a></h4>
 								<p>Categoría</p>
 							</td>
 							<td class="cart_price">
-								<p><?php echo $precioE;?></p>
+								<p><?php echo "$" . $precioE;?></p>
 							</td>
 							<td class="cart_quantity">
 								<div class="cart_quantity_button">
@@ -208,13 +209,14 @@
 								</div>
 							</td>
 							<td class="cart_total">
-								<p class="cart_total_price"><?php echo $precioE;?></p>
+								<p class="cart_total_price"><?php echo "$" . $precioE;?></p>
 							</td>
 							<td class="cart_delete">
 								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
 							</td>
 						</tr>
-							<?php 
+							<?php
+					$total=$total+$precioE; 
       }   //Cierra el Ciclo For
       }     //Cierra la condición IF
 ?>					
@@ -224,11 +226,11 @@
 								<table class="table table-condensed total-result">
 									<tr>
 										<td>Sub Total</td>
-										<td>$0</td>
+										<td><?php echo "$" . $total;?></td>
 									</tr>
 									<tr>
 										<td>Impuestos</td>
-										<td>$0</td>
+										<td><?php echo "$" . $total * .16;?></td>
 									</tr>
 									<tr class="shipping-cost">
 										<td>Costo de Envío</td>
@@ -236,7 +238,7 @@
 									</tr>
 									<tr>
 										<td>Total</td>
-										<td><span>$0</span></td>
+										<td><span><?php echo "$" . $total + ($total* .16)?></span></td>
 									</tr>
 								</table>
 							</td>
