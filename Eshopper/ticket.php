@@ -1,4 +1,8 @@
 <?php 
+  session_start();
+  $usuario = $_SESSION["usuario"];
+  $email = $_SESSION["email"];
+
    require('rounded_rect.php');
    setlocale(LC_TIME, "Spanish_Mexican");
 
@@ -13,12 +17,14 @@
    $pdf->Image('../Ticket.png',10,5,180,300);
    $pdf->Ln(40);
    $pdf->Cell(80,10,date("Y-m-d"),0,1,'R');
+   $pdf->Cell(50,50,$usuario,0,1,'R');
 
   if(file_exists('../carritocompras.txt')){
       $content = trim(file_get_contents('../carritocompras.txt'), PHP_EOL);
       $lineas = explode(PHP_EOL, $content);
       $total = 0;
-      $pdf->Cell(30,70,' ', 0,1, 'R');
+      $pdf->Cell(30,35,' ', 0,1, 'R');
+      $total=0;
 
       foreach($lineas as $linea){
          list($productoE, $precioE) = explode(',', $linea);
@@ -27,7 +33,7 @@
          $pdf->Cell(30,10,' ', 0,1, 'R');
          $total = $total + $precioE;
       }
-   $pdf->Ln(114);
+   $pdf->Ln(99);
   $pdf->Cell(160,10,"$ " . $total, 0,1, 'R');
   $pdf->Output();
    }
